@@ -1,0 +1,51 @@
+
+// Fonts
+
+// fontawesome
+@import "~font-awesome/scss/font-awesome";
+
+// simple-line-icons
+@import "~simple-line-icons/scss/simple-line-icons";
+
+// Variables
+
+// bootswatch theme variable
+@import "~bootswatch/dist/materia/_variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// bootswatch theme override
+@import "~bootswatch/dist/materia/bootswatch";
+
+// Bootstrap-Vue
+@import '~bootstrap-vue/dist/bootstrap-vue';
+
+// toastr
+@import "~toastr/toastr";
+
+// pace-progress
+@import "~pace-progress/themes/green/pace-theme-minimal";
+
+// custom styles
+@import "mega_menu";
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+// V-calendar component styles
+@import '~v-calendar/lib/v-calendar.min.css';
+
+// Flatpickr component themes
+@import '~flatpickr/dist/flatpickr';
+@import '~flatpickr/dist/themes/material_blue';
+
+.flatpickr-wrapper {
+  display: block;
+}
+
+.flatpickr-input[readonly] {
+  background-color: #fff;
+}

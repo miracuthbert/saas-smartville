@@ -1,0 +1,47 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyFilterNamespace\Filters\FiltersAbstract;
+
+class DummyClass extends FiltersAbstract
+{
+    /**
+     * A list of filters.
+     *
+     * @var array
+     */
+    protected $filters = [
+        // 'create' => DummyFilter::class,
+    ];
+
+    /**
+     * A list of default filters.
+     *
+     * @var array
+     */
+    protected $defaultFilters = [];
+
+    /**
+     * A list of filters map.
+     *
+     * @return array
+     */
+    public static function mappings()
+    {
+        // A sample filters map
+        // Each filter consists of a map and a (default) heading
+        // Replace map below with one of your choice
+        $map = [
+            'created' => [
+                'map' => [
+                    'desc' => 'Latest',
+                    'asc' => 'Older'
+                ],
+                'heading' => 'Date'
+            ],
+        ];
+
+        return $map;
+    }
+}
