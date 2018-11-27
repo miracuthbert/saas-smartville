@@ -3,6 +3,7 @@
 namespace Smartville\App\Console\Commands\Company\Properties;
 
 use Illuminate\Console\Command;
+use Smartville\Domain\Company\Jobs\CreateDefaultCompanyProperties;
 
 class SeedDemoProperties extends Command
 {
@@ -43,18 +44,6 @@ class SeedDemoProperties extends Command
             return;
         }
 
-        $properties = [
-            'Sunset View',
-            'Sunrise View',
-            'Bird\'s View',
-        ];
-
-        $properties = collect($properties)->each(function ($property) {
-            factory(\Smartville\Domain\Properties\Models\Property::class)->make([
-                'name' => $property
-            ]);
-        });
-
-        $company->properties()->createMany($properties);
+        dispatch(new CreateDefaultCompanyProperties($company));
     }
 }
