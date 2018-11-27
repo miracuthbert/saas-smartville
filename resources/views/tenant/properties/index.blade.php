@@ -64,7 +64,7 @@
                             </div>
                         </td>
                         <td>{{ $property->name }}</td>
-                        <td>{{ $property->category->name }}</td>
+                        <td>{{ optional($property->category)->name }}</td>
                         <td>
                             {{ $property->formattedPrice }}
                         </td>
