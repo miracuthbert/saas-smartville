@@ -193,7 +193,7 @@ class PropertyController extends Controller
         $property = new Property;
         $property->fill([
             'name' => uniqid(request()->tenant()->short_name),
-            'image' => 'none',
+            'image' => null,
             'overview_short' => 'None',
             'overview' => 'None',
             'currency' => \request()->tenant()->currency,
