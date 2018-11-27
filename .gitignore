@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/public/img/properties/*
 /public/storage
 /storage/*.key
 /vendor
@@ -12,3 +13,4 @@ npm-debug.log
 yarn-error.log
 .env
 routes.md
+tasks.md
