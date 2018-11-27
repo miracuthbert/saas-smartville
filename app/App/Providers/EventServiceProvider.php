@@ -64,11 +64,11 @@ class EventServiceProvider extends ServiceProvider
         UnregisteredUserTeamInvitation::class => [
             SendUnregisteredUserTeamInvitationEmail::class,
         ],
-        'Smartville\Domain\Company\Events\CompanyCreated' => [  // todo: setup listeners
+        'Smartville\Domain\Company\Events\CompanyCreated' => [
             'Smartville\Domain\Company\Listeners\SendCompanyWelcomeEmail',
             'Smartville\Domain\Company\Listeners\RegisterCreatedTenant',
             'Smartville\Domain\Company\Listeners\CreateCompanyRoles',
-            'Smartville\Domain\Company\Listeners\CreateCompanyAdmin',
+//            'Smartville\Domain\Company\Listeners\CreateCompanyAdmin',
             'Smartville\Domain\Company\Listeners\SeedCompany',
         ],
         TenantIdentified::class => [
@@ -80,7 +80,7 @@ class EventServiceProvider extends ServiceProvider
             SendUserInvitationEmail::class,
             SendAdminNewUserInvitedNotification::class,
         ],
-        'Smartville\Domain\Leases\Events\TenantVacated' => [  // todo: setup listeners
+        'Smartville\Domain\Leases\Events\TenantVacated' => [
             'Smartville\Domain\Leases\Listeners\SendAdminTenantVacatedEmail',
         ],
     ];
