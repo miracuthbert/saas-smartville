@@ -5,6 +5,7 @@ namespace Smartville\Domain\Company\Listeners;
 use Smartville\Domain\Company\Events\CompanyCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Smartville\Domain\Company\Jobs\CreateDefaultCompanyRoles;
 use Smartville\Domain\Company\Models\CompanyRole;
 use Smartville\Domain\Users\Models\Permission;
 
@@ -36,21 +37,9 @@ class CreateCompanyRoles
     public function handle(CompanyCreated $event)
     {
         $tenant = $event->tenant;
+        $user = $event->user;
 
-        //todo: get ids by scoping permissions according to role
-        $permissions = Permission::usable()->forCompany()->pluck('id')->all();
-
-        foreach ($this->roles as $role) {
-            $role = $tenant->roles()->create([
-                'name' => ucfirst($role),
-                'usable' => 1
-            ]);
-
-            // todo: dispatch job to create roles
-
-            if ($role->name == ucfirst('administrator')) {
-                $role->addPermissions($permissions);
-            }
-        }
+        // dispatch job to handle creation of roles
+        dispatch(new CreateDefaultCompanyRoles($tenant, $this->roles, $user));
     }
 }
