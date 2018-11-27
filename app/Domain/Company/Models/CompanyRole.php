@@ -61,7 +61,7 @@ class CompanyRole extends Model
     {
         return [
             'slug' => [
-                'source' => [request()->tenant()->name, 'name'],
+                'source' => ['company.short_name', 'name'],
                 'includeTrashed' => true,
                 'maxLength' => 255,
             ]
