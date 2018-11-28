@@ -6,7 +6,8 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" v-model="creating.form.name" class="form-control"
-                       :class="{'is-invalid': false === fieldState('creating', 'name')}" id="name" autofocus="">
+                       :class="{'is-invalid': false === fieldState('creating', 'name')}" id="name"
+                       :autofocus="autofocus">
 
                 <div class="invalid-feedback" v-if="false === fieldState('creating', 'name')">
                     {{ invalidFeedback('creating', 'name') }}
@@ -69,7 +70,14 @@
             headingStyles: {
                 required: false,
                 type: Array,
-                default: []
+                default: function () {
+                    return []
+                }
+            },
+            autofocus: {
+                required: false,
+                type: Boolean,
+                default: false
             }
         },
         data() {
