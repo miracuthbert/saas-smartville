@@ -38,6 +38,20 @@
   }
 }
 
+//
+// Core UI Mobile layout
+//
+
+@include media-breakpoint-down(md) {
+
+  // sidebar
+  .sidebar {
+    .sidebar-nav {
+      padding-bottom: 3.195rem;
+    }
+  }
+}
+
 .flatpickr-wrapper {
   display: block;
 }
