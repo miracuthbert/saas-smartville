@@ -1,7 +1,7 @@
 <!-- Jumbotron -->
 <div class="jumbotron jumbotron-fluid bg-success text-light mb-3">
     <div class="container text-center">
-        <h1 class="display-3">Simple, fast and easy.</h1>
+        <h1 class="display-3">Invoicing for Rentals</h1>
         <div class="mb-3"></div>
 
         <p class="lead text-capitalize">
