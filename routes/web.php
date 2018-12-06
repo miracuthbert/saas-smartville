@@ -85,6 +85,12 @@ Route::group(['namespace' => 'Home\Controllers'], function () {
 });
 
 /**
+ * Issues Routes
+ */
+Route::put('/issues/{issue}/close', 'Issue\Controllers\IssueCloseController@update')->name('issues.close');
+Route::resource('/issues', 'Issue\Controllers\IssueController')->only('update', 'destroy');
+
+/**
  * Support Routes
  */
 Route::group(['namespace' => 'Support\Controllers', 'as' => 'support.'], function () {
@@ -159,8 +165,8 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'], 'as' => 'account
      */
     Route::group(['namespace' => 'Notification\Controllers'], function () {
         Route::get('/notifications/unread', 'NotificationUnreadController@unread')->name('notifications.unread');
-        Route::apiResource('/notifications', 'NotificationController');
 
+        Route::apiResource('/notifications', 'NotificationController');
     });
 
     /**
@@ -172,6 +178,15 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'], 'as' => 'account
          * Dashboard
          */
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+        /**
+         * Issues Routes
+         */
+        Route::group(['namespace' => 'Issue'], function () {
+//            Route::get('/issues/unread', 'NotificationUnreadController@unread')->name('issues.unread');
+
+            Route::resource('/issues', 'IssueController');
+        });
 
         /**
          * Invoice Namespace Routes
