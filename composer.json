@@ -21,6 +21,7 @@
         "oriceon/laravel-settings": "^1.3",
         "pragmarx/countries": "^0.5.8",
         "rinvex/countries": "^5.0",
+        "spatie/valuestore": "^1.2",
         "unisharp/laravel-filemanager": "^1.8",
         "vinkla/hashids": "~5.0.0",
         "webpatser/laravel-uuid": "^3.0"
