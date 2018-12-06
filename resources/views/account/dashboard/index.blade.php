@@ -33,13 +33,14 @@
             @if(env('APP_ENV') === 'local')
                 <!-- New Property Issue -->
                     <div class="mb-3">
-                        <new-property-issue endpoint="{{ route('account.issues.index') }}" :is-expanded="false"/>
+                        <new-property-issue endpoint="{{ route('account.issues.index') }}"
+                                            :is-expanded="false"
+                                            :autofocus="true"/>
                     </div>
 
                     <div>
                         <issues endpoint="{{ route('account.issues.index') }}"
-                                :show-heading="false"
-                                :autofocus="true"/>
+                                :show-heading="false"/>
                     </div>
                 @else
                     <div class="alert alert-info">
