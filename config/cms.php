@@ -16,7 +16,7 @@ return [
     'theme' => [
         'folder' => 'themes',
         'layout' => 'app',
-        'active' => env('CMS_THEME', 'default'),
+        'active' => theme('current', 'default'),
     ],
 
     /**
