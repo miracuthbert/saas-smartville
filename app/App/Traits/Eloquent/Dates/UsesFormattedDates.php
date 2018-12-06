@@ -64,24 +64,37 @@ trait UsesFormattedDates
 
         return parent::__get($key);
     }
-//
-//    /**
-//     * Override the models toArray to append the formatted dates fields.
-//     *
-//     * @return array
-//     */
-//    public function toArray()
-//    {
-//        $data = parent::toArray();
-//
-//        if ($this->noFormat) return $data;
-//
-//        foreach ($this->getFormattedDateFields() as $dateField) {
-//            $data[$this->formattedFieldPrefix . $dateField] = $this->toDateObject($this->{$dateField});
-//        }
-//
-//        return $data;
-//    }
+
+    /**
+     * Override the models toArray to append the formatted dates fields.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $data = parent::toArray();
+
+        if ($this->noFormat) return $data;
+
+        foreach ($this->getFormattedDateFields() as $dateField) {
+            $data[$this->formattedFieldPrefix . $dateField] = $this->toDateObject($this->{$dateField});
+        }
+
+        return $data;
+    }
+
+    /**
+     * Format timestamp to datetime string.
+     *
+     * @param $dateValue
+     * @return string|null
+     */
+    private function datetime($dateValue)
+    {
+        if (is_null($dateValue)) return null;
+
+        return $this->inModelTimezone($dateValue)->toDateTimeString();
+    }
 
     /**
      * Format time part of timestamp.
@@ -134,6 +147,7 @@ trait UsesFormattedDates
     private function toDateObject($dateValue): array
     {
         return [
+            'datetime' => $this->datetime($dateValue),
             'date' => $this->formattedDate($dateValue),
             'time' => $this->formattedTime($dateValue),
             'for_human' => $this->formattedDiffForHumans($dateValue)
