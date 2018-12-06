@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Smartville\Domain\Amenities\Models\Amenity;
 use Smartville\Domain\Categories\Models\Category;
 use Smartville\Domain\Categories\Observers\CategoryObserver;
 use Smartville\Domain\Company\Models\Company;
@@ -13,6 +14,7 @@ use Smartville\Domain\Properties\Models\Property;
 use Smartville\Domain\Users\Models\Role;
 use Smartville\Domain\Users\Models\User;
 use Smartville\Domain\Users\Observers\RoleObserver;
+use Smartville\Domain\Utilities\Models\Utility;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
             'users' => User::class,
             'companies' => Company::class,
             'properties' => Property::class,
+            'amenities' => Amenity::class,
+            'utilities' => Utility::class,
         ]);
 
         Paginator::defaultView('vendor.pagination.bootstrap-4');
