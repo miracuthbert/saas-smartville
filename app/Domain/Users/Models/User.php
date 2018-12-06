@@ -17,6 +17,7 @@ use Smartville\App\Traits\Eloquent\Roles\HasPermissions;
 use Smartville\App\Traits\Eloquent\Roles\HasRoles;
 use Smartville\App\Traits\Eloquent\Subscriptions\HasSubscriptions;
 use Smartville\Domain\Company\Models\Company;
+use Smartville\Domain\Issues\Models\Issue;
 use Smartville\Domain\Leases\Models\Lease;
 use Smartville\Domain\Leases\Models\LeaseInvoice;
 use Smartville\Domain\Leases\Models\LeasePayment;
@@ -162,6 +163,16 @@ class User extends Authenticatable
     public function isTheSameAs(User $user)
     {
         return $this->id === $user->id;
+    }
+
+    /**
+     * Get issues opened by user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function issues()
+    {
+        return $this->hasMany(Issue::class);
     }
 
     /**
