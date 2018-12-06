@@ -72,6 +72,31 @@ Vue.component(
     require('../../../../assets/js/components/contact/Contact.vue')
 );
 
+Vue.component(
+    'issues',
+    require('../../../../assets/js/components/issues/Issues.vue')
+);
+
+Vue.component(
+    'new-property-issue',
+    require('../../../../assets/js/components/issues/NewPropertyIssue.vue')
+);
+
+Vue.component(
+    'issue-edit',
+    require('../../../../assets/js/components/issues/IssueEdit.vue')
+);
+
+Vue.component(
+    'issue-edit-status',
+    require('../../../../assets/js/components/issues/IssueEditStatus.vue')
+);
+
+Vue.component(
+    'issue-close',
+    require('../../../../assets/js/components/issues/IssueClose.vue')
+);
+
 /**
  * Mixins
  */

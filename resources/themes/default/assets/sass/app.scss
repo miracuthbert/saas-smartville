@@ -69,3 +69,13 @@
     display: block;
   }
 }
+
+// issues
+.topics {
+  .topic.badge {
+    font-size: 100%;
+    border-radius: 0;
+    font-weight: 400;
+    background-color: #607D8B;
+  }
+}
