@@ -23,7 +23,7 @@ class IssueIndexResource extends JsonResource
             'edited' => (bool)$this->isEdited(),
             'closed_at' => $this->local_closed_at,
             'closed' => (bool)$this->isClosed(),
-            'user' => $this->user,
+            'user' => new UserResource($this->user),
             'owner' => $this->owner,
             'topics' => IssueTopicResource::collection($this->whenLoaded('topics')),
         ];
