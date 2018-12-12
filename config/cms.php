@@ -16,7 +16,7 @@ return [
     'theme' => [
         'folder' => 'themes',
         'layout' => 'app',
-        'active' => theme('current', 'default'),
+        'active' => 'default',
     ],
 
     /**

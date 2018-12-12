@@ -35,7 +35,7 @@ class ThemeServiceProvider extends ServiceProvider
             $config = $app['config']['cms.theme'];
 
             $finder->setBasePath($app['path.resources'] . '/' . $config['folder']);
-            $finder->setActiveTheme($config['active']);
+            $finder->setActiveTheme(theme('current', $config['active']));
 
             return $finder;
         });
