@@ -85,10 +85,53 @@ Route::group(['namespace' => 'Home\Controllers'], function () {
 });
 
 /**
- * Issues Routes
+ * Comments Namespace Routes
  */
-Route::put('/issues/{issue}/close', 'Issue\Controllers\IssueCloseController@update')->name('issues.close');
-Route::resource('/issues', 'Issue\Controllers\IssueController')->only('update', 'destroy');
+Route::group(['namespace' => 'Comment\Controllers'], function () {
+
+    /**
+     * Comment Routes
+     */
+    Route::group(['prefix' => '/comments/{comment}', 'as' => 'comments.'], function () {
+
+        /**
+         * Comment Reply Routes
+         */
+        Route::resource('/replies', 'CommentReplyController')->only('store');
+    });
+
+    /**
+     * Comments Routes
+     */
+    Route::resource('/comments', 'CommentController')->only('update', 'destroy');
+});
+
+/**
+ * Issues Namespace Routes
+ */
+Route::group(['namespace' => 'Issue\Controllers'], function () {
+
+    /**
+     * Issue Routes
+     */
+    Route::group(['prefix' => '/issues/{issue}', 'as' => 'issues.'], function () {
+
+        /**
+         * Issue Comments Routes
+         */
+        Route::resource('/comments', 'IssueCommentController')->only('index', 'store');
+
+        /**
+         * Issue Close Route
+         */
+        Route::put('/close', 'IssueCloseController@update')->name('close');
+    });
+
+    /**
+     * Issues Routes
+     */
+    Route::resource('/issues', 'IssueController')->only('update', 'destroy');
+});
 
 /**
  * Support Routes
