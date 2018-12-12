@@ -1,4 +1,6 @@
+import user from '../../../../assets/js/mixins/user'
 import pluralize from '../../../../assets/js/mixins/pluralize'
+import highlight from '../../../../assets/js/directives/highlight'
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -97,10 +99,21 @@ Vue.component(
     require('../../../../assets/js/components/issues/IssueClose.vue')
 );
 
+Vue.component(
+    'comments',
+    require('../../../../assets/js/components/comments/Comments.vue')
+);
+
 /**
  * Mixins
  */
+Vue.mixin(user)
 Vue.mixin(pluralize)
+
+/**
+ * Directives
+ */
+Vue.directive('highlightjs', highlight)
 
 const app = new Vue({
     el: '#app'

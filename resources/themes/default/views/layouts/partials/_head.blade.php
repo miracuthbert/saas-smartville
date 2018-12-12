@@ -10,4 +10,13 @@
 <!-- Styles -->
 <link href="{{ theme_asset('css/app.css') }}" rel="stylesheet">
 
+<!-- Scripts -->
+<script>
+    window.user = @json([
+        'authenticated' => auth()->check() ? 'true' : 'false',
+        'id' => auth()->check() ? optional(auth()->user())->id : null,
+        'name' => auth()->check() ? optional(auth()->user())->name : null
+    ])
+</script>
+
 @stack('styles')

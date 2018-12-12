@@ -42,7 +42,7 @@
 }
 
 // V-calendar component styles
-@import '~v-calendar/lib/v-calendar.min.css';
+//@import '~v-calendar/lib/v-calendar.min.css';
 
 // Flatpickr component themes
 @import '~flatpickr/dist/flatpickr';
@@ -79,3 +79,6 @@
     background-color: #607D8B;
   }
 }
+
+// highlight.js styles
+@import "../../../../assets/sass/vendor/highlight.js";
