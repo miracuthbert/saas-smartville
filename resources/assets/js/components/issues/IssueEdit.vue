@@ -94,7 +94,7 @@
                         if (e.response.status === 422) {
                             this.editing.errors = e.response.data.errors
 
-                            toastr.error(error.response.message, 'Whoops!')
+                            toastr.error(error.response.data.message, 'Whoops!')
 
                             return
                         }

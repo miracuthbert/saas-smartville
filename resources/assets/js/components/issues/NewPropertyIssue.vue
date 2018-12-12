@@ -173,7 +173,7 @@
                         if (e.response.status === 422) {
                             this.creating.errors = e.response.data.errors
 
-                            toastr.error(error.response.message, 'Whoops!')
+                            toastr.error(e.response.data.message, 'Whoops!')
 
                             return
                         }
