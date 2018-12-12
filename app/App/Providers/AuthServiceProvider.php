@@ -5,6 +5,8 @@ namespace Smartville\App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
+use Smartville\Domain\Comments\Models\Comment;
+use Smartville\Domain\Comments\Policies\CommentPolicy;
 use Smartville\Domain\Leases\Policies\LeaseInvoicePolicy;
 use Smartville\Domain\Leases\Policies\LeasePaymentPolicy;
 use Smartville\Domain\Leases\Policies\LeasePolicy;
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         User::class => UserPolicy::class,
         Role::class => RolePolicy::class,
+        Comment::class => CommentPolicy::class,
     ];
 
     /**

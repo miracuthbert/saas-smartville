@@ -1,16 +1,14 @@
 <?php
 
-namespace Smartville\Domain\Issues\Models;
+namespace Smartville\Domain\Comments\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Smartville\App\Traits\Eloquent\Dates\UsesFormattedDates;
-use Smartville\Domain\Comments\Models\Comment;
-use Smartville\Domain\Issues\Filters\IssueFilters;
 use Smartville\Domain\Users\Models\User;
 
-class Issue extends Model
+class Comment extends Model
 {
     use SoftDeletes,
         UsesFormattedDates;
@@ -21,7 +19,6 @@ class Issue extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
         'body',
         'edited_at',
         'closed_at',
@@ -48,18 +45,17 @@ class Issue extends Model
     ];
 
     /**
-     * Return formatted issue topics.
+     * The "booting" method of the model.
      *
-     * @return mixed
+     * @return void
      */
-    public function formattedTopics()
+    protected static function boot()
     {
-        return $this->topics->map(function ($topic) {
-            return [
-                'id' => $topic->id,
-                'name' => optional($topic->issueable)->name ?: optional($topic->issueable)->title
-            ];
-        })->all();
+        parent::boot();
+
+        static::updating(function ($comment) {
+            $comment->edited_at = Carbon::now();
+        });
     }
 
     /**
@@ -93,43 +89,28 @@ class Issue extends Model
     }
 
     /**
-     * Scope the query by the request filters.
-     *
-     * @param Builder $builder
-     * @param $request
-     * @param array $filters
-     *
-     * @return Builder
-     */
-    public function scopeFilter(Builder $builder, $request, array $filters = [])
-    {
-        return (new IssueFilters($request))->add($filters)->filter($builder);
-    }
-
-    /**
-     * Get all of the issue's comments.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function comments()
-    {
-        return $this->morphMany(Comment::class, 'commentable')
-            ->whereNull('parent_id')
-            ->orderBy('created_at', 'desc');
-    }
-
-    /**
-     * Get all of the topics filed under the issue.
+     * Get all of the comment's children.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function topics()
+    public function children()
     {
-        return $this->hasMany(IssueTopic::class);
+        return $this->hasMany(Comment::class, 'parent_id', 'id')
+            ->orderBy('created_at', 'asc');
     }
 
     /**
-     * The user that posted the issue.
+     * Get all of the owning commentable models.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
+
+    /**
+     * The user that owns the comment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

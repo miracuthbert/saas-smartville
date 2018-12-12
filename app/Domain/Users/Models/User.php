@@ -16,6 +16,7 @@ use Smartville\App\Traits\Eloquent\Roles\HasCompanyPermissions;
 use Smartville\App\Traits\Eloquent\Roles\HasPermissions;
 use Smartville\App\Traits\Eloquent\Roles\HasRoles;
 use Smartville\App\Traits\Eloquent\Subscriptions\HasSubscriptions;
+use Smartville\Domain\Comments\Models\Comment;
 use Smartville\Domain\Company\Models\Company;
 use Smartville\Domain\Issues\Models\Issue;
 use Smartville\Domain\Leases\Models\Lease;
@@ -163,6 +164,16 @@ class User extends Authenticatable
     public function isTheSameAs(User $user)
     {
         return $this->id === $user->id;
+    }
+
+    /**
+     * Get all of the user's comment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     /**
