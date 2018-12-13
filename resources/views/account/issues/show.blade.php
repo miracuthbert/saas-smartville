@@ -60,8 +60,6 @@
 
     <!-- todo: add comment functionality -->
     <section>
-        <h4>Comments
-            <small class="text-muted">0</small>
-        </h4>
+        <comments endpoint="{{ route('issues.comments.index', $issue) }}"/>
     </section>
 @endsection
