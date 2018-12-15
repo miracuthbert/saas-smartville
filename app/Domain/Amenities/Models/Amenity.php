@@ -47,7 +47,7 @@ class Amenity extends Model
     {
         return [
             'slug' => [
-                'source' => ['name'],
+                'source' => ['identifier', 'name'],
                 'includeTrashed' => true,
                 'maxLength' => 255,
             ]
