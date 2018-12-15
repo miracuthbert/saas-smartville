@@ -13,7 +13,7 @@ You now can:
 * Manage properties, leases, invoices and many more
 @endcomponent
 
-@component('mail::button', ['url' => route('tenant.switch', $company), 'button' => 'green'])
+@component('mail::button', ['url' => route('tenant.switch', $company), 'color' => 'success'])
 Get Started
 @endcomponent
 

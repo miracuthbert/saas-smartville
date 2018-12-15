@@ -16,7 +16,7 @@ _We wish you all the best and hope our platform helps you serve your clients bet
 
 Use the link below to login and access your company dashboard.
 
-@component('mail::button', ['url' => route('tenant.switch', $company), 'color' => 'green'])
+@component('mail::button', ['url' => route('tenant.switch', $company), 'color' => 'success'])
 Get Started
 @endcomponent
 

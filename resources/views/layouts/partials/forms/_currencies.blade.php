@@ -2,7 +2,7 @@
     <label for="currency" class="control-label col-md-4">Currency</label>
     <div class="col-md-6">
         <select name="currency" id="currency"
-                class="form-control custom-select{{ $errors->has('currency') ? ' is-invalid' : '' }}"{{ $attrs or '' }}>
+                class="form-control custom-select{{ $errors->has('currency') ? ' is-invalid' : '' }}"{{ $attrs??'' }}>
             <option value="">--- Select a currency ---</option>
             @foreach($currencies as $currency)
                 @if(old('currency') == $currency->cc)

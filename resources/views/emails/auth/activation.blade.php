@@ -7,7 +7,7 @@ Thank you for signing up.
 
 Please activate your account to get started.
 
-@component('mail::button', ['url' => route('activation.activate', $token), 'color' => 'green'])
+@component('mail::button', ['url' => route('activation.activate', $token), 'color' => 'success'])
 Activate
 @endcomponent
 

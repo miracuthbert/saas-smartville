@@ -51,8 +51,8 @@
                                 {{ $page->prettyUri }}
                             </a>
                         </td>
-                        <td>{{ $page->name or 'None' }}</td>
-                        <td>{{ $page->template or 'None' }}</td>
+                        <td>{{ $page->name??'None' }}</td>
+                        <td>{{ $page->template??'None' }}</td>
                         <td>{{ $page->usable ? 'Active' : 'Disabled' }}</td>
                         <td>
                             <div class="btn-group" role="group">

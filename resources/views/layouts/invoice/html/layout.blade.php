@@ -3,9 +3,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="author" content="{{ $author or config('app.name') }}">
-    <meta name="description" content="{{ $description or config('app.name') }}">
-    <title>{{ $title or config('app.name') }}</title>
+    <meta name="author" content="{{ $author??config('app.name') }}">
+    <meta name="description" content="{{ $description??config('app.name') }}">
+    <title>{{ $title??config('app.name') }}</title>
 </head>
 <body>
 <style>
@@ -345,7 +345,7 @@
     <tr>
         <td align="center">
             <table class="content" width="100%" cellpadding="0" cellspacing="0">
-            {{ $header or '' }}
+            {{ $header??'' }}
 
             <!-- Email Body -->
                 <tr>
@@ -356,14 +356,14 @@
                                 <td class="content-cell">
                                     {{ $slot }}
 
-                                    {{ $subcopy or '' }}
+                                    {{ $subcopy??'' }}
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
 
-                {{ $footer or '' }}
+                {{ $footer??'' }}
             </table>
         </td>
     </tr>
