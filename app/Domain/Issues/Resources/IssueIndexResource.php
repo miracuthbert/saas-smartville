@@ -3,6 +3,7 @@
 namespace Smartville\Domain\Issues\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Smartville\Domain\Users\Resources\UserResource;
 
 class IssueIndexResource extends JsonResource
 {
