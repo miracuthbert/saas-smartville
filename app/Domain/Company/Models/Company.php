@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Smartville\App\Tenant\Models\Tenant;
 use Smartville\App\Tenant\Traits\IsTenant;
 use Smartville\App\Traits\Eloquent\Auth\SendsInvitationTokens;
+use Smartville\Domain\Issues\Models\Issue;
 use Smartville\Domain\Leases\Models\Lease;
 use Smartville\Domain\Leases\Models\LeaseInvoice;
 use Smartville\Domain\Properties\Models\Property;
@@ -31,6 +32,16 @@ class Company extends Model implements Tenant
         'timezone',
         'short_name',
     ];
+
+    /**
+     * Get all of the company issues.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function issues()
+    {
+        return $this->morphToMany(Issue::class, 'issueable', 'issue_topics');
+    }
 
     /**
      * Get all utility invoices for company.
