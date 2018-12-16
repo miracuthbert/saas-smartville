@@ -10,5 +10,14 @@
 <!-- Styles -->
 <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 
+<!-- Scripts -->
+<script>
+    window.user = @json([
+        'authenticated' => auth()->check() ? 'true' : 'false',
+        'id' => auth()->check() ? optional(auth()->user())->id : null,
+        'name' => auth()->check() ? optional(auth()->user())->name : null
+    ])
+</script>
+
 <!-- Custom Styles -->
 @stack('styles')

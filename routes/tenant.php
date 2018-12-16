@@ -299,6 +299,17 @@ Route::group(['as' => 'tenant.'], function () {
     Route::group(['prefix' => '/account/manage'], function () {
 
         /**
+         * Issue Namespace Routes
+         */
+        Route::group(['namespace' => 'Issue'], function () {
+
+            /**
+             * Issues Resource Routes
+             */
+            Route::resource('/issues', 'IssueController');
+        });
+
+        /**
          * Roles Namespace Routes
          */
         Route::group(['namespace' => 'Role'], function () {
@@ -360,11 +371,21 @@ Route::group(['as' => 'tenant.'], function () {
 
     /**
      * --------------------------------------------------------------------------
-     * Dashboard
+     * Dashboard Group Routes
      * --------------------------------------------------------------------------
-     *
      */
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::group(['prefix' => '/dashboard'], function () {
+
+        /**
+         * Issues Route
+         */
+        Route::get('/issues', 'TenantIssueController@index')->name('dashboard.issues.index');
+
+        /**
+         * Dashboard Route
+         */
+        Route::get('/', 'DashboardController@index')->name('dashboard');
+    });
 
 
     /**
