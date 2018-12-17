@@ -54,7 +54,8 @@
             Issue
         },
         mounted() {
-            Bus.$on('issue:created', this.pushToIssues)
+            Bus.$on('issue:created', this.prependToIssues)
+                .$on('issue:closed', this.closeIssue)
 
             this.loadIssues()
         },
@@ -104,7 +105,7 @@
                 Bus.$emit('issues:loaded', this.meta.total)
             },
             async closeIssue(issue) {
-                //
+                _.assign(_.find(this.issues, {id: issue.id}), issue)
             },
             async removeIssue(issue) {
                 this.issues = this.issues.filter((node) => {
@@ -115,13 +116,18 @@
 
                 Bus.$emit('issue:removed', this.meta.total)
 
-                this.loadOneAfterDeletion()
+                await this.loadOneAfterDeletion()
             },
-            async pushToIssues(issue) {
+            async prependToIssues(issue) {
                 this.issues.unshift(issue)
 
-                this.fetchMeta()
+                await this.fetchMeta()
+
                 this.scrollToIssue(issue)
+
+                if(this.meta.current_page < this.meta.last_page) {
+                    this.issues.pop()
+                }
             },
             async scrollToIssue(issue) {
                 setTimeout(() => {

@@ -71,8 +71,7 @@
         data() {
             return {
                 deleting: false,
-                closing: false,
-                closed: null
+                closing: false
             }
         },
         computed: {
@@ -82,10 +81,6 @@
             closeStatus() {
                 if (this.closing !== false) {
                     return this.closing
-                }
-
-                if (this.closed !== null) {
-                    return this.closed
                 }
 
                 return this.issue.closed
@@ -124,7 +119,7 @@
             },
             async closeIssue(issue) {
                 if (issue.id === this.issue.id) {
-                    this.closed = issue.closed
+                    this.closing = false
                 }
             }
         }
