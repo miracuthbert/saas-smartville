@@ -35,7 +35,7 @@
                 <li class="list-inline-item">
                     <i class="icon-speech"></i> 0 Comments
                 </li>
-                <li class="list-inline-item" v-if="!closeStatus">
+                <li class="list-inline-item" v-if="issue.owner && !closeStatus">
                     <a href="#" @click.prevent="destroy" v-if="!deleting">
                         <i class="icon-trash"></i> Delete
                     </a>
