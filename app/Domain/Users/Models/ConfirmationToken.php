@@ -18,10 +18,14 @@ class ConfirmationToken extends Model
     ];
 
     /**
-     *  Booting of model
+     * The "booting" method of the model.
+     *
+     * @return void
      */
-    public static function boot()
+    protected static function boot()
     {
+        parent::boot();
+
         static::creating(function ($token) {
             optional($token->user->confirmationToken)->delete();
         });

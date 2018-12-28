@@ -16,12 +16,14 @@ class TwoFactor extends Model
     ];
 
     /**
-     *  Booting of model
+     * The "booting" method of the model.
      *
-     * Delete any previous two factor.
+     * @return void
      */
-    public static function boot()
+    protected static function boot()
     {
+        parent::boot();
+
         static::creating(function ($twoFactor) {
             optional($twoFactor->user->twoFactor)->delete();
         });
