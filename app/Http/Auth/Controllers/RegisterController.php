@@ -4,6 +4,7 @@ namespace Smartville\Http\Auth\Controllers;
 
 use Smartville\App\Controllers\Controller;
 use Smartville\Domain\Auth\Events\UserSignedUp;
+use Smartville\Domain\Company\Models\Company;
 use Smartville\Domain\Leases\Models\Lease;
 use Smartville\Domain\Properties\Models\Property;
 use Smartville\Domain\Users\Models\User;
@@ -123,6 +124,8 @@ class RegisterController extends Controller
 
         $confirm = $user->confirmCompanyInvitation($companyId, $invitationId);
 
+        $company = Company::find($companyId);
+
         if (!$confirm) {
             $invitation = UserInvitation::find($invitationId);
 
@@ -135,8 +138,8 @@ class RegisterController extends Controller
         // remove tenant invitation from session
         session()->forget('company_invitation');
 
-        // redirect to tenant dashboard
-        return redirect()->route('tenant.switch', $companyId)
+        // redirect to tenant (company) dashboard
+        return redirect()->route('tenant.switch', $company)
             ->withSuccess('Thank you for signing up. Your account has been activated.')
             ->withInfo("You can now access company's dashboard.");
     }
@@ -154,8 +157,9 @@ class RegisterController extends Controller
 
         $confirm = $user->confirmTenantInvitation($propertyId, $invitationId);
 
+        $property = Property::find($propertyId);
+
         if (!$confirm) {
-            $property = Property::find($propertyId);
             $invitation = UserInvitation::find($invitationId);
 
             return redirect()->route('account.dashboard')
@@ -171,7 +175,7 @@ class RegisterController extends Controller
         session()->forget('tenant_invitation');
 
         // redirect to tenant dashboard
-        return redirect()->route('account.leases.show', $lease)
+        return redirect()->route('tenant.switch', [$property->company, 'redirect' => 'tenants'])
             ->withSuccess('Thank you for signing up. Your account has been activated.')
             ->withInfo('Your lease has been setup successfully.');
     }
