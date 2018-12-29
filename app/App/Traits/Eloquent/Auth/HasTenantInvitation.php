@@ -37,8 +37,8 @@ trait HasTenantInvitation
         // set property status as occupied
         $lease->property->updatePropertyOccupancyStatus();
 
-        // optional: add user to company
-//        $this->companies()->syncWithoutDetaching($lease->property->company->id);
+        // add tenant to company users
+        $this->addTenantAsUserToCompany($lease->property->company);
 
         // update user lease
         $this->updateLease($lease);
@@ -62,8 +62,8 @@ trait HasTenantInvitation
         // set property status as occupied
         $lease->property->updatePropertyOccupancyStatus();
 
-        // optional: add user to company
-//        $this->companies()->syncWithoutDetaching($lease->property->company->id);
+        // add tenant to company users
+        $this->addTenantAsUserToCompany($lease->property->company);
 
         // update user lease
         $this->updateLease($lease);
@@ -97,5 +97,15 @@ trait HasTenantInvitation
         $this->update([
             'activated' => true
         ]);
+    }
+
+    /**
+     * Add tenant to company users.
+     *
+     * @param $company
+     */
+    protected function addTenantAsUserToCompany($company)
+    {
+        $this->companies()->syncWithoutDetaching($company->id);
     }
 }
