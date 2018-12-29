@@ -12,10 +12,11 @@ class TenantSwitchController extends Controller
     /**
      * Switch tenant.
      *
+     * @param Request $request
      * @param Company $company
      * @return \Illuminate\Http\Response
      */
-    public function switch(Company $company)
+    public function switch(Request $request, Company $company)
     {
         event(new CompanyUserLogin(
             request()->user(),
@@ -38,6 +39,10 @@ class TenantSwitchController extends Controller
 
         if (session()->has('warning')) {
             session()->flash('warning', session('warning'));
+        }
+
+        if ($request->redirect == 'tenants') {
+            return redirect()->route('tenants.dashboard');
         }
 
         return redirect()->route('tenant.dashboard');
