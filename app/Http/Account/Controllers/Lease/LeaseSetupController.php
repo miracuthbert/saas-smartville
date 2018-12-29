@@ -27,7 +27,7 @@ class LeaseSetupController extends Controller
                 ->with('alert_link_name', 'Try setup again');
         }
 
-        return redirect()->route('account.dashboard')
+        return redirect()->route('tenant.switch', [$property->company, 'redirect' => 'tenants'])
             ->withSuccess("Your lease has been successfully added. Check your list of leases to see the changes.");
     }
 }
