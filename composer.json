@@ -9,7 +9,7 @@
         "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-dompdf": "^0.8.2",
         "cviebrock/eloquent-sluggable": "^4.5",
-        "fideloper/proxy": "~4.0",
+        "fideloper/proxy": "^4.0",
         "graham-campbell/markdown": "^10.0",
         "guzzlehttp/guzzle": "^6.3",
         "kalnoy/nestedset": "^4.3",
