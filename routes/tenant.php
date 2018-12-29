@@ -16,6 +16,20 @@
 | contains the "tenant" middleware group. Now create something great!
 |
 */
+
+/**
+ * Tenants Panel Routes
+ */
+Route::group(['as' => 'tenants.'], function () {
+
+    /**
+     * Tenant Dashboard Route
+     */
+    Route::get('/tenants/dashboard', function () {
+        return view('tenants.dashboard.index');
+    })->name('dashboard');
+});
+
 Route::group(['as' => 'tenant.'], function () {
 
     /**
