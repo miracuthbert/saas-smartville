@@ -24,10 +24,11 @@ class TeamMemberController extends Controller
     {
         $members = $request->tenant()->users()->with([
             'companyRoles' => function ($query) {
-                return $query->whereNull('expires_at')
-                    ->orWhere('expires_at', '>', Carbon::now());
+                return $query->whereNull('expires_at')->orWhere('expires_at', '>', Carbon::now());
             }
-        ])->paginate();
+        ])->whereHas('companyRoles', function ($query) {
+            return $query->whereNull('expires_at')->orWhere('expires_at', '>', Carbon::now());
+        })->paginate();
 
         return view('tenant.account.team.index', compact('members'));
     }
