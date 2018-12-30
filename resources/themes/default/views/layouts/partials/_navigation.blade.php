@@ -61,11 +61,19 @@
                         </div>
                     </li>
 
+                    <!-- Notifications -->
+                    <li class="nav-item">
+                        <a class="nav-link{{ return_if(on_page('account.dashboard.notifications.index'), ' active') }}"
+                           href="{{ route('account.dashboard.notifications.index') }}" title="Notifications">
+                            <span><notification-badge/></span> <i class="icon-bell"></i> <span class="d-inline d-md-none">Notifications</span>
+                        </a>
+                    </li>
+
                     <!-- My Dashboard -->
                     <li class="nav-item">
                         <a class="nav-link{{ return_if(on_page('account.dashboard'), ' active') }}"
                            href="{{ route('account.dashboard') }}" title="My Dashboard">
-                            <span><notification-badge/></span> <i class="icon-speedometer"></i> <span class="d-inline d-md-none">My Dashboard</span>
+                            <i class="icon-speedometer"></i> <span class="d-inline d-md-none">My Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
