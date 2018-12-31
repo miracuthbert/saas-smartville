@@ -32,7 +32,7 @@
                     <div class="col-md-6">
                         <input id="last_name" type="text"
                                class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name"
-                               value="{{ old('last_name', auth()->user()->last_name) }}" required autofocus>
+                               value="{{ old('last_name', auth()->user()->last_name) }}" required>
 
                         @if ($errors->has('last_name'))
                             <div class="invalid-feedback">
@@ -48,7 +48,7 @@
                     <div class="col-md-6">
                         <input id="username" type="text"
                                class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username"
-                               value="{{ old('username', auth()->user()->username) }}" required autofocus>
+                               value="{{ old('username', auth()->user()->username) }}" required>
 
                         @if ($errors->has('username'))
                             <div class="invalid-feedback">
@@ -85,7 +85,7 @@
                     <div class="col-md-6">
                         <input id="phone" type="text"
                                class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone"
-                               value="{{ old('phone', auth()->user()->phone) }}" required autofocus>
+                               value="{{ old('phone', auth()->user()->phone) }}">
 
                         @if ($errors->has('phone'))
                             <div class="invalid-feedback">
