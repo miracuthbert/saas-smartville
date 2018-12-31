@@ -218,6 +218,11 @@ Route::group(['prefix' => '/account', 'middleware' => ['auth'], 'as' => 'account
     Route::group(['namespace' => 'Account\Controllers'], function () {
 
         /**
+         * Dashboard Issues Route
+         */
+        Route::get('/dashboard/issues', 'IssueController@index')->name('dashboard.issues.index');
+
+        /**
          * Notifications Route
          */
         Route::get('/dashboard/notifications', 'NotificationController@index')->name('dashboard.notifications.index');

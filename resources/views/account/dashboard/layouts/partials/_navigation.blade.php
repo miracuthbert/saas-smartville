@@ -13,6 +13,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link{{ return_if(on_page('account.dashboard.issues.index'), ' active') }}"
+               href="{{ route('account.dashboard.issues.index') }}">
+                Issues
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link{{ return_if(on_page('account.leases.index'), ' active') }}"
                href="{{ route('account.leases.index') }}">
                 Leases
