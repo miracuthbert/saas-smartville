@@ -12,6 +12,7 @@ use Smartville\Domain\Issues\Resources\IssueResource;
 use Smartville\Domain\Properties\Models\Property;
 use Smartville\Domain\Properties\Resources\PropertyResource;
 use Smartville\Domain\Utilities\Models\Utility;
+use Smartville\Http\Issue\Requests\IssueStoreRequest;
 
 class IssueController extends Controller
 {
@@ -49,10 +50,10 @@ class IssueController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param IssueStoreRequest $request
      * @return \Illuminate\Http\Response|IssueResource
      */
-    public function store(Request $request)
+    public function store(IssueStoreRequest $request)
     {
         $property = Property::find($request->property_id);
 

@@ -2,6 +2,7 @@
 
 namespace Smartville\Domain\Issues\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -46,6 +47,20 @@ class Issue extends Model
         'closed_at',
         'deleted_at',
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function ($issue) {
+            $issue->edited_at = Carbon::now();
+        });
+    }
 
     /**
      * Return formatted issue topics.
