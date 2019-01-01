@@ -2,6 +2,8 @@
     <div>
         <h4 v-if="showHeading">Issues</h4>
 
+        <slot/>
+
         <template v-if="issues.length">
             <ul class="list-unstyled">
                 <Issue v-for="issue in issues"
@@ -125,7 +127,7 @@
 
                 this.scrollToIssue(issue)
 
-                if(this.meta.current_page < this.meta.last_page) {
+                if (this.meta.current_page < this.meta.last_page) {
                     this.issues.pop()
                 }
             },
