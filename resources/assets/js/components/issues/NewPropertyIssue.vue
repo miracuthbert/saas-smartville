@@ -10,26 +10,46 @@
             <form class="mb-4" action="#" @submit.prevent="store">
                 <div class="form-group">
                     <label for="title">Issue <sup>*</sup></label>
-                    <input type="text" class="form-control" id="title" placeholder="issue..."
+                    <input type="text" class="form-control"
+                           :class="{'is-invalid': false === fieldState('creating', 'title')}"
+                           id="title"
+                           placeholder="issue..."
                            v-model="creating.form.title" :autofocus="autofocus">
+
+                    <div class="invalid-feedback" v-if="false === fieldState('creating', 'title')">
+                        {{ invalidFeedback('creating', 'title') }}
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="body">Details of issue <sup>*</sup></label>
-                    <textarea class="form-control" id="body" placeholder="details of issue..."
+                    <textarea class="form-control"
+                              :class="{'is-invalid': false === fieldState('creating', 'body')}"
+                              id="body"
+                              rows="3"
+                              placeholder="details of issue..."
                               v-model="creating.form.body"></textarea>
+
+                    <div class="invalid-feedback" v-if="false === fieldState('creating', 'body')">
+                        {{ invalidFeedback('creating', 'body') }}
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="property_id">Property <sup>*</sup></label>
                     <select id="property_id"
                             class="custom-select form-control"
+                            :class="{'is-invalid': false === fieldState('creating', 'property_id')}"
                             v-model="creating.form.property_id"
                             @change="changed">
                         <option :value="property.id" v-for="property in properties">
                             {{ property.name }}
                         </option>
                     </select>
+
+                    <div class="invalid-feedback" v-if="false === fieldState('creating', 'property_id')">
+                        {{ invalidFeedback('creating', 'property_id') }}
+                    </div>
                 </div>
 
                 <div class="form-group" v-if="amenities.length">

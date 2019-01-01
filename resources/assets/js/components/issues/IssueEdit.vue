@@ -10,8 +10,16 @@
 
         <form class="mb-4" action="#" @submit.prevent="update" v-else>
             <div class="form-group">
-                <textarea class="form-control" id="body" placeholder="details of issue..."
+                <textarea class="form-control"
+                          :class="{'is-invalid': false === fieldState('editing', 'body')}"
+                          id="body"
+                          :rows="textareaHeight"
+                          placeholder="details of issue..."
                           v-model="editing.form.body" autofocus=""></textarea>
+
+                <div class="invalid-feedback" v-if="false === fieldState('editing', 'body')">
+                    {{ invalidFeedback('editing', 'body') }}
+                </div>
             </div>
 
             <div class="form-group">
@@ -70,6 +78,9 @@
                 }
 
                 return this.issue.closed_at ? true : false
+            },
+            textareaHeight() {
+                return Math.max(Math.floor(this.issue.body.split(/\r*\n/).length / 2), 6)
             }
         },
         mixins: [
