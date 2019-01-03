@@ -1,4 +1,12 @@
 @section('sidebar')
+    <!-- Issues -->
+    <li class="nav-item">
+        <a class="nav-link{{ return_if(on_page('tenant.dashboard.issues.index'), ' active') }}"
+           href="{{ route('tenant.dashboard.issues.index') }}">
+            <i class="icon-exclamation"></i> Issues
+        </a>
+    </li>
+
     <!-- Amenities -->
     <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="#">
