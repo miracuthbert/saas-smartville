@@ -9,6 +9,7 @@ use Smartville\Http\ViewComposers\AdminPagesComposer;
 use Smartville\Http\ViewComposers\AdminTutorialsComposer;
 use Smartville\Http\ViewComposers\AmenitiesComposer;
 use Smartville\Http\ViewComposers\CategoriesComposer;
+use Smartville\Http\ViewComposers\Company\CompanyPaymentMethodsComposer;
 use Smartville\Http\ViewComposers\Company\CurrentMonthTenantsMetricsComposer;
 use Smartville\Http\ViewComposers\Company\PropertyMetricsComposer;
 use Smartville\Http\ViewComposers\Company\CurrentMonthInvoicesComposer;
@@ -95,6 +96,11 @@ class ComposerServiceProvider extends ServiceProvider
             'tenant.properties.partials.forms._utilities',
             'tenant.utilities.partials.form._utilities',
         ], CompanyUtilitiesComposer::class);
+
+        // company payment methods
+        View::composer([
+            'tenant.partials.forms._payment_methods'
+        ], CompanyPaymentMethodsComposer::class);
 
         // properties filters mappings
         View::composer([

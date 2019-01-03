@@ -162,6 +162,27 @@
         </ul>
     </li>
 
+    <!-- Team -->
+    <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="#">
+            <i class="icon-credit-card"></i> Payment Methods
+        </a>
+        <ul class="nav-dropdown-items">
+            <li class="nav-item">
+                <a class="nav-link{{ return_if(on_page('tenant.account.payments.methods.create'), ' active') }}"
+                   href="{{ route('tenant.account.payments.methods.create') }}">
+                    <i class="icon-plus"></i> Add Payment Method
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{{ return_if(on_page('tenant.account.payments.methods.index'), ' active') }}"
+                   href="{{ route('tenant.account.payments.methods.index') }}">
+                    <i class="icon-credit-card"></i> Payment Methods
+                </a>
+            </li>
+        </ul>
+    </li>
+
     <!-- Roles -->
     <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="#">

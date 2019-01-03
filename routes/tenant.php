@@ -361,6 +361,21 @@ Route::group(['as' => 'tenant.'], function () {
         Route::group(['namespace' => 'Account', 'as' => 'account.'], function () {
 
             /**
+             * Payments Routes
+             */
+            Route::group(['prefix' => '/payments', 'as' => 'payments.'], function () {
+
+                /**
+                 * Payment Methods Routes
+                 */
+                Route::resource('/methods', 'PaymentMethodController', [
+                    'parameters' => [
+                        'methods' => 'companyPaymentMethod'
+                    ]
+                ]);
+            });
+
+            /**
              * Account Team Routes
              */
             Route::resource('/team', 'TeamMemberController', [
