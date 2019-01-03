@@ -24,7 +24,10 @@ class IssueController extends Controller
      */
     public function index(Request $request)
     {
-        $issues = $request->user()->issues()->with('topics.issueable', 'user')->filter($request)->paginate(3);
+        $issues = $request->user()->issues()->with('topics.issueable', 'user')
+            ->withCount('comments')
+            ->filter($request)
+            ->paginate(3);
 
         return IssueIndexResource::collection($issues);
     }

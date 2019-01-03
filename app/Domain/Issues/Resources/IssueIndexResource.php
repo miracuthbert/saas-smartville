@@ -27,6 +27,7 @@ class IssueIndexResource extends JsonResource
             'user' => new UserResource($this->user),
             'owner' => $this->owner,
             'topics' => IssueTopicResource::collection($this->whenLoaded('topics')),
+            'commentsCount' => $this->comments_count,
         ];
     }
 }

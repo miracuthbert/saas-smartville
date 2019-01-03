@@ -19,7 +19,10 @@ class IssueController extends Controller
     {
         $company = $request->tenant();
 
-        $issues = $company->issues()->with('topics.issueable', 'user')->filter($request)->paginate(3);
+        $issues = $company->issues()->with('topics.issueable', 'user')
+            ->withCount('comments')
+            ->filter($request)
+            ->paginate(3);
 
         return IssueIndexResource::collection($issues);
     }
