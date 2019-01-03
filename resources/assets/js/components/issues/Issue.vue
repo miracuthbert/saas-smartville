@@ -33,7 +33,7 @@
 
             <ul class="list-inline mb-3">
                 <li class="list-inline-item">
-                    <i class="icon-speech"></i> 0 Comments
+                    <i class="icon-speech"></i> {{ issue.commentsCount }} Comments
                 </li>
                 <li class="list-inline-item" v-if="issue.owner && !closeStatus">
                     <a href="#" @click.prevent="destroy" v-if="!deleting">
