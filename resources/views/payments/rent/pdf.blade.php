@@ -18,40 +18,52 @@
 
     {{-- Body --}}
     <div>
-        <p><strong>Receipt #:</strong> {{ $leasePayment->hash_id }}</p>
-        <p><strong>Date:</strong> {{ $leasePayment->formattedPaidAt }}</p>
-        <p><strong>Name:</strong> {{ $leasePayment->invoice->user->name }}</p>
+        <div>
+            <div><strong>Receipt #:</strong></div>
+            <p>{{ $leasePayment->hash_id }}</p>
+        </div>
+        <div>
+            <div><strong>Date:</strong></div>
+            <p>{{ $leasePayment->formattedPaidAt }}</p>
+        </div>
+        <div>
+            <div><strong>Name:</strong></div>
+            <p>{{ $leasePayment->invoice->user->name }}</p>
+        </div>
     </div>
     <hr>
 
     @component('layouts.invoice.html.table')
         <table>
-            <caption>
-                Payment Details
-            </caption>
+            <thead>
             <tr>
-                <th scope="row" class="text-left" width="50%">Property</th>
-                <td class="text-right">{{ $leasePayment->property->name }}</td>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    {{ $leasePayment->property->name }} - (Property rent)
+                </td>
+                <td>{{ $leasePayment->invoice->formattedInvoiceMonth }}</td>
+                <td>{{ $leasePayment->formattedAmount }}</td>
             </tr>
             <tr>
-                <th scope="row" class="text-left" width="50%">Rent for</th>
-                <td class="text-right">{{ $leasePayment->invoice->formattedInvoiceMonth }}</td>
+                <td></td>
+                <th scope="row">Total</th>
+                <td>{{ $leasePayment->formattedAmount }}</td>
             </tr>
-            <tr>
-                <th scope="row" class="text-left">Amount</th>
-                <td class="text-right">{{ $leasePayment->formattedAmount }}</td>
-            </tr>
-            <tr>
-                <th scope="row" class="text-left" width="50%">Processed by</th>
-                <td class="text-right">{{ $leasePayment->admin->name }}</td>
-            </tr>
+            </tbody>
         </table>
     @endcomponent
 
-    {{-- Footer --}}
-    @slot('footer')
-        @component('layouts.invoice.html.footer')
-            &copy; {{ date('Y') }} {{ $leasePayment->property->company->name }}. All rights reserved.
-        @endcomponent
-    @endslot
+    <hr>
+
+    {{-- Meta --}}
+    <div>
+        <div><strong>Processed by</strong></div>
+        <p>{{ optional($leasePayment->admin)->name }}</p>
+    </div>
 @endcomponent

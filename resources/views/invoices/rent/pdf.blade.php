@@ -5,6 +5,7 @@
     @slot('header')
         @component('layouts.invoice.html.header', ['url' => config('app.url')])
             {{ $leaseInvoice->property->company->name }}
+            {{-- todo: Add Address --}}
         @endcomponent
     @endslot
 
@@ -27,29 +28,35 @@
 
     @component('layouts.invoice.html.table')
         <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
             <tr>
-                <th scope="row" class="text-left" width="50%">Property</th>
-                <td class="text-right">{{ $leaseInvoice->property->name }}</td>
+                <td>
+                    {{ $leaseInvoice->property->name }} - (Property rent)
+                </td>
+                <td>{{ $leaseInvoice->formattedInvoiceMonth }}</td>
+                <td>{{ $leaseInvoice->formattedAmount }}</td>
             </tr>
             <tr>
-                <th scope="row" class="text-left" width="50%">Rent for</th>
-                <td class="text-right">{{ $leaseInvoice->formattedInvoiceMonth }}</td>
+                <td></td>
+                <th scope="row">Total</th>
+                <td>{{ $leaseInvoice->formattedAmount }}</td>
             </tr>
-            <tr>
-                <th scope="row" class="text-left">Amount</th>
-                <td class="text-right">{{ $leaseInvoice->formattedAmount }}</td>
-            </tr>
-            <tr>
-                <th scope="row" class="text-left" width="50%">Payment due on</th>
-                <td class="text-right">{{ $leaseInvoice->formattedDueAt }}</td>
-            </tr>
+            </tbody>
         </table>
-        @endcomponent
-
-        {{-- Footer --}}
-        @slot('footer')
-        @component('layouts.invoice.html.footer')
-        &copy; {{ date('Y') }} {{ $leaseInvoice->property->company->name }}. All rights reserved.
     @endcomponent
-    @endslot
+
+    <hr>
+
+    {{-- Meta --}}
+    <div>
+        <div><strong>Payment due on</strong></div>
+        <p>{{ $leaseInvoice->formattedDueAt }}</p>
+    </div>
 @endcomponent

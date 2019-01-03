@@ -5,6 +5,7 @@
     @slot('header')
         @component('layouts.invoice.html.header', ['url' => config('app.url')])
             {{ $utilityInvoice->property->company->name }}
+            {{-- todo: Add Address --}}
         @endcomponent
     @endslot
 
@@ -27,40 +28,43 @@
 
     @component('layouts.invoice.html.table')
         <table>
+            <thead>
             <tr>
-                <th scope="row" class="text-left" width="50%">Property</th>
-                <td class="text-right">{{ $utilityInvoice->property->name }}</td>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tr>
+                <td>
+                    {{ $utilityInvoice->utility->name }}
+                    <br>
+                    Property - {{ $utilityInvoice->property->name }}
+
+                    {{-- Show if utility varied --}}
+                    @if($utilityInvoice->utility->billing_type == 'varied')
+                        <br>
+                        Previous reading - {{ $utilityInvoice->previous }} {{ $utilityInvoice->units }}
+                        <br>
+                        Current reading - {{ $utilityInvoice->current }} {{ $utilityInvoice->units }}
+                    @endif
+                </td>
+                <td>{{ $utilityInvoice->formattedInvoiceMonth }}</td>
+                <td>{{ $utilityInvoice->formattedAmount }}</td>
             </tr>
             <tr>
-                <th scope="row" class="text-left" width="50%">Utility</th>
-                <td class="text-right">{{ $utilityInvoice->utility->name }}</td>
-            </tr>
-            {{-- Show if utility varied --}}
-            @if($utilityInvoice->utility->billing_type == 'varied')
-                <tr>
-                    <th scope="row">Previous</th>
-                    <td class="text-right">{{ $utilityInvoice->previous }} {{ $utilityInvoice->units }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Current</th>
-                    <td class="text-right">{{ $utilityInvoice->current }} {{ $utilityInvoice->units }}</td>
-                </tr>
-            @endif
-            <tr>
-                <th scope="row" class="text-left">Amount</th>
-                <td class="text-right">{{ $utilityInvoice->formattedAmount }}</td>
-            </tr>
-            <tr>
-                <th scope="row" class="text-left" width="50%">Payment due on</th>
-                <td class="text-right">{{ $utilityInvoice->formattedDueAt }}</td>
+                <td></td>
+                <th scope="row">Total</th>
+                <td>{{ $utilityInvoice->formattedAmount }}</td>
             </tr>
         </table>
     @endcomponent
 
-    {{-- Footer --}}
-    @slot('footer')
-        @component('layouts.invoice.html.footer')
-            &copy; {{ date('Y') }} {{ $utilityInvoice->property->company->name }}. All rights reserved.
-        @endcomponent
-    @endslot
+    <hr>
+
+    {{-- Meta --}}
+    <div>
+        <div><strong>Payment due on</strong></div>
+        <p>{{ $utilityInvoice->formattedDueAt }}</p>
+    </div>
 @endcomponent

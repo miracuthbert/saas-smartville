@@ -18,44 +18,54 @@
 
     {{-- Body --}}
     <div>
-        <p><strong>Receipt #:</strong> {{ $utilityPayment->hash_id }}</p>
-        <p><strong>Date:</strong> {{ $utilityPayment->formattedPaidAt }}</p>
-        <p><strong>Name:</strong> {{ $utilityPayment->invoice->user->name }}</p>
+        <div>
+            <div><strong>Receipt #:</strong></div>
+            <p>{{ $utilityPayment->hash_id }}</p>
+        </div>
+        <div>
+            <div><strong>Date:</strong></div>
+            <p>{{ $utilityPayment->formattedPaidAt }}</p>
+        </div>
+        <div>
+            <div><strong>Name:</strong></div>
+            <p>{{ $utilityPayment->invoice->user->name }}</p>
+        </div>
     </div>
     <hr>
 
     @component('layouts.invoice.html.table')
         <table>
-            <caption>
-                Payment Details
-            </caption>
+            <thead>
             <tr>
-                <th scope="row" class="text-left" width="50%">Property</th>
-                <td class="text-right">{{ $utilityPayment->property->name }}</td>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    {{ $utilityPayment->utility->name }}
+                    <br>
+                    Property - {{ $utilityPayment->property->name }}
+                </td>
+                <td>{{ $utilityPayment->invoice->formattedInvoiceMonth }}</td>
+                <td>{{ $utilityPayment->formattedAmount }}</td>
             </tr>
             <tr>
-                <th scope="row" class="text-left" width="50%">Utility</th>
-                <td class="text-right">{{ $utilityPayment->utility->name }}</td>
+                <td></td>
+                <th scope="row">Total</th>
+                <td>{{ $utilityPayment->formattedAmount }}</td>
             </tr>
-            <tr>
-                <th scope="row" class="text-left" width="50%">For</th>
-                <td class="text-right">{{ $utilityPayment->invoice->formattedInvoiceMonth }}</td>
-            </tr>
-            <tr>
-                <th scope="row" class="text-left">Amount</th>
-                <td class="text-right">{{ $utilityPayment->formattedAmount }}</td>
-            </tr>
-            <tr>
-                <th scope="row" class="text-left" width="50%">Processed by</th>
-                <td class="text-right">{{ $utilityPayment->admin->name }}</td>
-            </tr>
+            </tbody>
         </table>
     @endcomponent
 
-    {{-- Footer --}}
-    @slot('footer')
-        @component('layouts.invoice.html.footer')
-            &copy; {{ date('Y') }} {{ $utilityPayment->property->company->name }}. All rights reserved.
-        @endcomponent
-    @endslot
+    <hr>
+
+    {{-- Meta --}}
+    <div>
+        <div><strong>Processed by</strong></div>
+        <p>{{ optional($utilityPayment->admin)->name }}</p>
+    </div>
 @endcomponent
