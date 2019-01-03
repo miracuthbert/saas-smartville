@@ -10,6 +10,7 @@ use Smartville\Domain\Amenities\Models\Amenity;
 use Smartville\Domain\Categories\Models\Category;
 use Smartville\Domain\Categories\Observers\CategoryObserver;
 use Smartville\Domain\Company\Models\Company;
+use Smartville\Domain\Issues\Models\Issue;
 use Smartville\Domain\Properties\Models\Property;
 use Smartville\Domain\Users\Models\Role;
 use Smartville\Domain\Users\Models\User;
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
             'properties' => Property::class,
             'amenities' => Amenity::class,
             'utilities' => Utility::class,
+            'issues' => Issue::class,
         ]);
 
         Paginator::defaultView('vendor.pagination.bootstrap-4');
