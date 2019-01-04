@@ -4,6 +4,7 @@ namespace Smartville\Http\Tenant\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UtilityInvoiceClearanceStoreRequest extends FormRequest
 {
@@ -27,6 +28,10 @@ class UtilityInvoiceClearanceStoreRequest extends FormRequest
         return [
             'amount' => 'required|numeric',
             'paid_at' => 'required|date',
+            'payment_method_id' => [
+                'nullable',
+                Rule::exists('company_payment_methods', 'id')->where('usable', true)
+            ],
             'description' => 'nullable|max:300',
         ];
     }
@@ -55,6 +60,7 @@ class UtilityInvoiceClearanceStoreRequest extends FormRequest
     {
         return [
             'paid_at' => 'paid at',
+            'payment_method_id' => 'payment method',
         ];
     }
 }

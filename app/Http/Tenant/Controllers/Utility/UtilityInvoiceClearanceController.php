@@ -46,7 +46,7 @@ class UtilityInvoiceClearanceController extends Controller
         }
 
         $payment = new UtilityPayment();
-        $payment->fill($request->only('amount', 'description', 'paid_at'));
+        $payment->fill($request->only('amount', 'description', 'paid_at', 'payment_method_id'));
         $payment->utility()->associate($utilityInvoice->utility);
         $payment->invoice()->associate($utilityInvoice);
         $payment->lease()->associate($utilityInvoice->lease);

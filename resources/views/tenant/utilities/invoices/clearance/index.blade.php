@@ -112,6 +112,10 @@
                     'description' => 'Date payment made.'
                 ])
 
+                @include('tenant.partials.forms._payment_methods', [
+                    'description' => 'The payment method used.'
+                ])
+
                 <div class="form-group row{{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="description" class="control-label col-md-4">Description</label>
                     <div class="col-md-6">
