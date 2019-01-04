@@ -45,7 +45,7 @@ class RentInvoiceClearanceController extends Controller
     public function update(LeaseInvoiceClearanceStoreRequest $request, LeaseInvoice $leaseInvoice)
     {
         $payment = new LeasePayment();
-        $payment->fill($request->only('amount', 'description', 'paid_at'));
+        $payment->fill($request->only('amount', 'description', 'paid_at', 'payment_method_id'));
         $payment->invoice()->associate($leaseInvoice);
         $payment->lease()->associate($leaseInvoice->lease);
         $payment->property()->associate($leaseInvoice->lease->property);

@@ -8,6 +8,7 @@ use Smartville\App\HashIds\Traits\UsesHashIds;
 use Smartville\App\Money\Money;
 use Smartville\App\Traits\Eloquent\Dates\UsesFormattedDates;
 use Smartville\App\Traits\Eloquent\HasAmount;
+use Smartville\Domain\Company\Models\CompanyPaymentMethod;
 use Smartville\Domain\Properties\Models\Property;
 use Smartville\Domain\Users\Models\User;
 
@@ -27,6 +28,7 @@ class LeasePayment extends Model
         'amount',
         'description',
         'paid_at',
+        'payment_method_id',
     ];
 
     /**
@@ -77,6 +79,16 @@ class LeasePayment extends Model
     public function getFormattedPaidAtAttribute()
     {
         return $this->paid_at != null ? $this->paid_at->format('Y-m-d') : null;
+    }
+
+    /**
+     * Get the transaction's payment method.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function paymentMethod()
+    {
+        return $this->hasOne(CompanyPaymentMethod::class, 'id', 'payment_method_id');
     }
 
     /**
