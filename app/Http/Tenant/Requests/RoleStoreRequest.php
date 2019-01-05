@@ -29,6 +29,7 @@ class RoleStoreRequest extends FormRequest
                 'required',
                 'max:50',
                 Rule::unique('company_roles', 'name')
+                    ->where('company_id', request()->tenant()->id)
             ],
             'details' => 'required|max:160',
         ];

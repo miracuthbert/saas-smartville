@@ -13,11 +13,12 @@ class RoleUpdateRequest extends RoleStoreRequest
      */
     public function rules()
     {
-        return array_merge(array_except(parent::rules(), 'name'), [
+        return array_merge((array_except(parent::rules(), 'name')), [
             'name' => [
                 'required',
                 'max:50',
                 Rule::unique('company_roles', 'name')->ignoreModel($this->companyRole)
+                ->where('company_id', $this->companyRole->company_id)
             ],
             'usable' => 'required|boolean',
         ]);
