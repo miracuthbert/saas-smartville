@@ -3,6 +3,7 @@
 namespace Smartville\Http\Account\Controllers\Issue;
 
 use Smartville\Domain\Amenities\Models\Amenity;
+use Smartville\Domain\Issues\Jobs\SendNewCompanyIssuePostedNotification;
 use Smartville\Domain\Issues\Models\Issue;
 use Illuminate\Http\Request;
 use Smartville\App\Controllers\Controller;
@@ -83,6 +84,9 @@ class IssueController extends Controller
         $issue->topics()->saveMany($topics);
 
         $issue->load('topics.issueable');
+
+        // dispatch job to send notification
+        dispatch(new SendNewCompanyIssuePostedNotification($issue, $property->company));
 
         return new IssueResource($issue);
     }
