@@ -24,7 +24,11 @@ class IssueController extends Controller
             ->filter($request)
             ->paginate(3);
 
-        return IssueIndexResource::collection($issues);
+        return (IssueIndexResource::collection($issues))->additional([
+            'meta' => [
+                'open' => $company->issues->where('closed_at', null)->count()
+            ]
+        ]);
     }
 
     /**
@@ -40,7 +44,7 @@ class IssueController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +55,7 @@ class IssueController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Smartville\Domain\Issues\Models\Issue  $issue
+     * @param  \Smartville\Domain\Issues\Models\Issue $issue
      * @return \Illuminate\Http\Response
      */
     public function show(Issue $issue)
@@ -66,8 +70,8 @@ class IssueController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Smartville\Domain\Issues\Models\Issue  $issue
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Smartville\Domain\Issues\Models\Issue $issue
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Issue $issue)
@@ -78,7 +82,7 @@ class IssueController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Smartville\Domain\Issues\Models\Issue  $issue
+     * @param  \Smartville\Domain\Issues\Models\Issue $issue
      * @return \Illuminate\Http\Response
      */
     public function destroy(Issue $issue)

@@ -30,7 +30,11 @@ class IssueController extends Controller
             ->filter($request)
             ->paginate(3);
 
-        return IssueIndexResource::collection($issues);
+        return (IssueIndexResource::collection($issues))->additional([
+            'meta' => [
+                'open' => $request->user()->issues->where('closed_at', null)->count()
+            ]
+        ]);
     }
 
     /**
