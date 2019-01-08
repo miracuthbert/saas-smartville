@@ -78,6 +78,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'activated' => false,
+            'timezone' => geoip(request()->ip())->timezone,
         ]);
     }
 
