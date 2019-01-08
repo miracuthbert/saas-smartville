@@ -38,6 +38,6 @@ class TenantCacheManager extends CacheManager
      */
     protected function getTenantCacheTag()
     {
-        return ['tenant_' . $this->app[Manager::class]->getTenant()->uuid];
+        return ['tenant_' . optional($this->app[Manager::class]->getTenant())->uuid];
     }
 }
