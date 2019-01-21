@@ -91,6 +91,11 @@ Vue.component(
     require('./components/comments/Comments.vue')
 );
 
+Vue.component(
+    'reminders',
+    require('./components/reminders/Reminders.vue')
+);
+
 /**
  * Mixins
  */
