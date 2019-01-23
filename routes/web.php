@@ -85,6 +85,28 @@ Route::group(['namespace' => 'Home\Controllers'], function () {
 });
 
 /**
+ * Utility Namespace Routes
+ */
+Route::group(['namespace' => 'Utility\Controllers'], function () {
+
+    /**
+     * Utilities Settings Map Route
+     */
+    Route::get('/utilities/settings/map', 'UtilitySettingsMapController')->name('utilities.settings.map');
+});
+
+/**
+ * Rent Namespace Routes
+ */
+Route::group(['namespace' => 'Rent\Controllers'], function () {
+
+    /**
+     * Rent Settings Map Route
+     */
+    Route::get('/rent/settings/map', 'RentSettingsMapController')->name('rent.settings.map');
+});
+
+/**
  * Comments Namespace Routes
  */
 Route::group(['namespace' => 'Comment\Controllers'], function () {

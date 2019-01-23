@@ -96,6 +96,16 @@ Vue.component(
     require('./components/reminders/Reminders.vue')
 );
 
+Vue.component(
+    'rent-settings',
+    require('./components/tenant/rent/settings/Settings.vue')
+);
+
+Vue.component(
+    'utilities-settings',
+    require('./components/tenant/utilities/settings/Settings.vue')
+);
+
 /**
  * Mixins
  */

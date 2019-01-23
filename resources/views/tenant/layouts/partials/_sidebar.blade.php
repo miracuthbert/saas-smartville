@@ -67,6 +67,8 @@
             </li>
         </ul>
     </li>
+    <!-- Rent -->
+    <li class="nav-title">Rent</li>
     <!-- Rent Invoices -->
     <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="#">
@@ -86,6 +88,16 @@
                 </a>
             </li>
         </ul>
+    </li>
+    <!-- Rent Settings -->
+    <li class="nav-item">
+        <a class="nav-link{{ return_if(on_page('tenant.rent.setting.index'), ' active') }}"
+           href="{{ route('tenant.rent.setting.index') }}">
+            <i class="icon-settings"></i> Rent Settings
+            @norentsettings
+            <small class="badge badge-warning rounded-circle">&nbsp;</small>
+            @endnorentsettings
+        </a>
     </li>
     <!-- Utilities -->
     <li class="nav-title">Utilities / Services</li>
@@ -127,6 +139,17 @@
             </li>
         </ul>
     </li>
+    <!-- Utility Settings -->
+    <li class="nav-item">
+        <a class="nav-link{{ return_if(on_page('tenant.utilities.setting.index'), ' active') }}"
+           href="{{ route('tenant.utilities.setting.index') }}">
+            <i class="icon-settings"></i> Utility Settings
+            @noutilitysettings
+            <small class="badge badge-warning rounded-circle">&nbsp;</small>
+            @endnoutilitysettings
+        </a>
+    </li>
+
     <!-- Account -->
     <li class="nav-title">MANAGE ACCOUNT</li>
     <li class="nav-item">

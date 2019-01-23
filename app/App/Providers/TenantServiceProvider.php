@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Smartville\App\Settings\TenantRentSettings;
+use Smartville\App\Settings\TenantUtilitySettings;
 use Smartville\App\Tenant\Cache\TenantCacheManager;
 use Smartville\App\Tenant\Manager;
 use Smartville\App\Tenant\Observers\TenantObserver;
@@ -34,11 +36,19 @@ class TenantServiceProvider extends ServiceProvider
         });
 
         Request::macro('tenant', function () {
-           return app(Manager::class)->getTenant();
+            return app(Manager::class)->getTenant();
         });
 
-        Blade::if('tenant', function() {
+        Blade::if ('tenant', function () {
             return app(Manager::class)->hasTenant();
+        });
+
+        Blade::if ('noutilitysettings', function () {
+            return (false === app(TenantUtilitySettings::class)->has(optional(app(Manager::class)->getTenant())->uuid));
+        });
+
+        Blade::if ('norentsettings', function () {
+            return (false === app(TenantRentSettings::class)->has(optional(app(Manager::class)->getTenant())->uuid));
         });
 
         try {
@@ -61,6 +71,14 @@ class TenantServiceProvider extends ServiceProvider
     {
         $this->app->extend('cache', function () {
             return new TenantCacheManager($this->app);
+        });
+
+        $this->app->singleton(TenantRentSettings::class, function () {
+            return TenantRentSettings::make(storage_path('app/tenant/rent.json'));
+        });
+
+        $this->app->singleton(TenantUtilitySettings::class, function () {
+            return TenantUtilitySettings::make(storage_path('app/tenant/utilities.json'));
         });
     }
 }

@@ -109,6 +109,25 @@ Route::group(['as' => 'tenant.'], function () {
                     'invoices' => 'utilityInvoice'
                 ]
             ]);
+
+            /**
+             * Utilities Settings Route
+             */
+            Route::get('/setting', 'UtilitySettingController')->name('setting.index');
+
+            /**
+             * Utilities Settings Reset Route
+             */
+            Route::post('/settings/reset', 'UtilitySettingsResetController')->name('settings.reset');
+
+            /**
+             * Utilities Settings Resource Routes
+             */
+            Route::resource('/settings', 'UtilitySettingsController', [
+                'parameters' => [
+                    'settings' => 'key'
+                ]
+            ]);
         });
 
         /**
@@ -123,7 +142,7 @@ Route::group(['as' => 'tenant.'], function () {
     Route::group(['namespace' => 'Rent'], function () {
 
         /**
-         * Rent Invoices Group Routes
+         * Rent Group Routes
          */
         Route::group(['prefix' => '/rent', 'as' => 'rent.'], function () {
 
@@ -186,6 +205,25 @@ Route::group(['as' => 'tenant.'], function () {
             Route::resource('/invoices', 'RentInvoiceController', [
                 'parameters' => [
                     'invoices' => 'leaseInvoice'
+                ]
+            ]);
+
+            /**
+             * Rent Settings Route
+             */
+            Route::get('/setting', 'RentSettingController')->name('setting.index');
+
+            /**
+             * Rent Settings Reset Route
+             */
+            Route::post('/settings/reset', 'RentSettingsResetController')->name('settings.reset');
+
+            /**
+             * Rent Resource Routes
+             */
+            Route::resource('/settings', 'RentSettingsController', [
+                'parameters' => [
+                    'settings' => 'key'
                 ]
             ]);
         });
