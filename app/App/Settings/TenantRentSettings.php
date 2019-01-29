@@ -65,9 +65,7 @@ class TenantRentSettings extends Valuestore
             ],
             'invoice-template' => [
                 'label' => 'Invoice template',
-                'values' => array_merge([
-                    'default' => 'Default',
-                ], static::getInvoiceTemplates()),
+                'values' => static::getInvoiceTemplates(),
             ],
         ];
 
@@ -81,12 +79,12 @@ class TenantRentSettings extends Valuestore
      */
     protected static function getInvoiceTemplates()
     {
-        $cmsPath = resource_path('views/invoices/rent');
+        $templatesPath = resource_path('views/invoices/rent/pdf');
 
-        $layouts = collect(File::files($cmsPath, true))->mapWithKeys(function ($layout, $key) {
+        $layouts = collect(File::files($templatesPath, true))->mapWithKeys(function ($layout, $key) {
             $name = str_replace(".blade.php", '', $layout->getFilename());
 
-            return [$name => $name];
+            return [$name => title_case($name)];
         });
 
         return $layouts->toArray();

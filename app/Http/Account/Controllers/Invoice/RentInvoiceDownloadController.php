@@ -24,7 +24,7 @@ class RentInvoiceDownloadController extends Controller
 
         $leaseInvoice->load('property', 'lease', 'user');
 
-        $pdf = PDF::loadView('invoices.rent.pdf', compact('leaseInvoice'));
+        $pdf = PDF::loadView('invoices.rent.pdf.default', compact('leaseInvoice'));
 
         return $pdf->download("{$leaseInvoice->hash_id}.pdf");
     }
