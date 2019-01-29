@@ -10,6 +10,10 @@ use Smartville\App\Console\Commands\Company\invoices\SendRentDueReminderNotifica
 use Smartville\App\Console\Commands\Company\invoices\SendRentPastDueReminderNotificationCommand;
 use Smartville\App\Console\Commands\Company\Invoices\SendUtilityDueReminderNotificationCommand;
 use Smartville\App\Console\Commands\Company\Invoices\SendUtilityPastDueReminderNotificationCommand;
+use Smartville\Domain\Leases\Jobs\GenerateScheduledLeaseInvoices;
+use Smartville\Domain\Leases\Jobs\SendLeaseInvoicesGenerationReminders;
+use Smartville\Domain\Utilities\Jobs\GenerateScheduledUtilityInvoices;
+use Smartville\Domain\Utilities\Jobs\SendUtilityInvoicesGenerationReminders;
 
 class Kernel extends ConsoleKernel
 {
@@ -60,6 +64,26 @@ class Kernel extends ConsoleKernel
 
         $schedule->command(SendUtilityDueReminderNotificationCommand::class, [7])
             ->weekly()
+            ->evenInMaintenanceMode();
+
+        // create scheduled lease (rent) invoices
+        $schedule->job(new GenerateScheduledLeaseInvoices())
+            ->dailyAt('09:00')
+            ->evenInMaintenanceMode();
+
+        // create fixed utility invoices
+        $schedule->job(new GenerateScheduledUtilityInvoices)
+            ->dailyAt('09:00')
+            ->evenInMaintenanceMode();
+
+        // send rent invoices generation reminders
+        $schedule->job(new SendLeaseInvoicesGenerationReminders)
+            ->dailyAt('08:30')
+            ->evenInMaintenanceMode();
+
+        // send utility invoices generation reminders
+        $schedule->job(new SendUtilityInvoicesGenerationReminders)
+            ->dailyAt('08:30')
             ->evenInMaintenanceMode();
     }
 
