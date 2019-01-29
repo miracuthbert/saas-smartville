@@ -3,6 +3,7 @@
 namespace Smartville\Domain\Company\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Smartville\App\Tenant\Models\Tenant;
 use Smartville\App\Tenant\Traits\IsTenant;
 use Smartville\App\Traits\Eloquent\Auth\SendsInvitationTokens;
@@ -11,12 +12,14 @@ use Smartville\Domain\Leases\Models\Lease;
 use Smartville\Domain\Leases\Models\LeaseInvoice;
 use Smartville\Domain\Properties\Models\Property;
 use Smartville\Domain\Users\Models\User;
+use Smartville\Domain\Utilities\Models\Utility;
 use Smartville\Domain\Utilities\Models\UtilityInvoice;
 
 class Company extends Model implements Tenant
 {
     use IsTenant,
-        SendsInvitationTokens;
+        SendsInvitationTokens,
+        Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +39,7 @@ class Company extends Model implements Tenant
     /**
      * Get all of the company issues.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function issues()
     {
@@ -51,6 +54,16 @@ class Company extends Model implements Tenant
     public function utilityInvoices()
     {
         return $this->hasManyThrough(UtilityInvoice::class, Property::class);
+    }
+
+    /**
+     * Get utilities owned by company.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function utilities()
+    {
+        return $this->hasMany(Utility::class);
     }
 
     /**
