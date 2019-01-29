@@ -35,10 +35,10 @@ class GenerateScheduledLeaseInvoices implements ShouldQueue
             ->all();
 
         // get start day
-        $startAt = now()->addMonth()->startOfMonth();
+        $startAt = now()->endOfMonth()->next()->startOfMonth();
 
         // get end day
-        $endAt = now()->addMonth()->endOfMonth();
+        $endAt = now()->endOfMonth()->next()->endOfMonth();
 
         // get companies with active utilities; set to send invoices today
         $companies = Company::with('properties.currentLease.user')
