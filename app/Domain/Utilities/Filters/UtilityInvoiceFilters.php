@@ -47,7 +47,9 @@ class UtilityInvoiceFilters extends FiltersAbstract
     {
         $map = [
             'utility' => [
-                'map' => Utility::where('usable', true)->get()->pluck('name', 'slug'),
+                'map' => Utility::with('company')->where('usable', true)
+                    ->get()
+                    ->pluck('name', 'slug'),
                 'heading' => 'Utilities'
             ],
             'status' => [

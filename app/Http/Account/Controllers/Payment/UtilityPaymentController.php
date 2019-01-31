@@ -17,7 +17,7 @@ class UtilityPaymentController extends Controller
     public function index(Request $request)
     {
         $payments = $request->user()->utilityPayments()
-            ->with('property.company', 'utility', 'invoice', 'admin')
+            ->with(['property', 'utility.company', 'invoice', 'admin'])
             ->orderByDesc('paid_at')
             ->paginate();
 

@@ -22,7 +22,7 @@ class UtilityController extends Controller
             return redirect()->route('tenant.dashboard');
         }
 
-        $utilities = Utility::with('properties')->latest()->paginate();
+        $utilities = Utility::with(['company', 'properties'])->latest()->paginate();
 
         return view('tenant.utilities.index', compact('utilities'));
     }

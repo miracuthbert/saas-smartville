@@ -29,7 +29,7 @@ class UtilityInvoiceController extends Controller
 
         $invoices = $request->tenant()->utilityInvoices()
             ->filter($request)
-            ->with('utility', 'property', 'user', 'payments.invoice')
+            ->with(['utility.company', 'property', 'user', 'payments.invoice'])
             ->paginate();
 
         return view('tenant.utilities.invoices.index', compact('invoices'));

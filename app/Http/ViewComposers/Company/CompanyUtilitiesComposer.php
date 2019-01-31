@@ -29,7 +29,7 @@ class CompanyUtilitiesComposer
     public function compose(View $view)
     {
         if(!$this->utilities) {
-            $this->utilities = Utility::active()->get();
+            $this->utilities = Utility::with('company')->active()->get();
         }
 
         $view->with('utilities', $this->utilities);
