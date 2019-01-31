@@ -56,7 +56,9 @@ class GenerateScheduledUtilityInvoices implements ShouldQueue
             // loop through the companies
             $companies->each(function ($company) use ($endAt, $startAt, $day) {
                 // get company's utilities
-                $utilities = $company->utilities->whereStrict('billing_day', $day);
+                $utilities = $company->utilities->whereStrict('billing_day', $day)
+                    ->where('billing_type', '=', 'fixed')
+                    ->where('usable', true);
 
                 // loop through utilities
                 $utilities->each(function ($utility) use ($endAt, $startAt, $company) {
