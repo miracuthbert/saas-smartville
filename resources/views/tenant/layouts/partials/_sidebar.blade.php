@@ -1,4 +1,15 @@
 @section('sidebar')
+    <!-- Notifications -->
+    <li class="nav-item">
+        <a class="nav-link{{ return_if(on_page('tenant.dashboard.notifications'), ' active') }}"
+           href="{{ route('tenant.dashboard.notifications') }}">
+            <i class="icon-bell"></i> Notifications
+            @tenantUnreadNotifications
+            <small class="badge badge-warning rounded-circle">&nbsp;</small>
+            @endtenantUnreadNotifications
+        </a>
+    </li>
+
     <!-- Issues -->
     <li class="nav-item">
         <a class="nav-link{{ return_if(on_page('tenant.dashboard.issues.index'), ' active') }}"

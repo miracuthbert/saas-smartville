@@ -106,6 +106,11 @@ Vue.component(
     require('./components/tenant/utilities/settings/Settings.vue')
 );
 
+Vue.component(
+    'notifications',
+    require('./components/notifications/Notifications.vue')
+);
+
 /**
  * Mixins
  */

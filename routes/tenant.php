@@ -351,6 +351,17 @@ Route::group(['as' => 'tenant.'], function () {
     Route::group(['prefix' => '/account/manage'], function () {
 
         /**
+         * Notification Namespace Routes
+         */
+        Route::group(['namespace' => 'Notification'], function () {
+
+            /**
+             * Notifications Resource Routes
+             */
+            Route::apiResource('/notifications', 'NotificationController');
+        });
+
+        /**
          * Issue Namespace Routes
          */
         Route::group(['namespace' => 'Issue'], function () {
@@ -442,6 +453,11 @@ Route::group(['as' => 'tenant.'], function () {
      * --------------------------------------------------------------------------
      */
     Route::group(['prefix' => '/dashboard'], function () {
+
+        /**
+         * Notifications Route
+         */
+        Route::get('/notifications', 'TenantNotificationController')->name('dashboard.notifications');
 
         /**
          * Issues Route

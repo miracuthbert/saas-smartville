@@ -51,6 +51,12 @@ class TenantServiceProvider extends ServiceProvider
             return (false === app(TenantRentSettings::class)->has(optional(app(Manager::class)->getTenant())->uuid));
         });
 
+        Blade::if ('tenantUnreadNotifications', function () {
+            return app(Manager::class)->hasTenant() ?
+                app(Manager::class)->getTenant()->unreadNotifications()->count() > 0 :
+                false;
+        });
+
         try {
             Permission::where('usable', true)->forCompany()->get()->map(function ($permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
